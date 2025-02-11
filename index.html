@@ -1,114 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form Validation</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-    
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        form {
-            background: white;
-            width: 300px;
-            padding: 50px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px gray;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .error {
-            color: red;
-            font-size: 0.9em;
-        }
-        button {
-            background: blue;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: darkblue;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 100vh;
+        background-color: #f4f4f4;
+      }
+      form {
+        background: white;
+        width: 300px;
+        padding: 50px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px gray;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .error {
+        color: red;
+        font-size: 0.9em;
+      }
+      button {
+        background: blue;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: darkblue;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <form id="myForm" onsubmit="return validateForm()">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name">
-            <span class="error" id="nameError"></span>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-            <span class="error" id="emailError"></span>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-            <span class="error" id="passwordError"></span>
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword">
-            <span class="error" id="confirmPasswordError"></span>
-        </div>
-        <button type="submit">Submit</button>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+        <span class="error" id="nameError"></span>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
+        <span class="error" id="emailError"></span>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <span class="error" id="passwordError"></span>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" />
+        <span class="error" id="confirmPasswordError"></span>
+      </div>
+      <button type="submit" id="submit">Submit</button>
     </form>
 
     <script>
-        function validateForm() {
-            let isValid = true;
-            document.querySelectorAll(".error").forEach(el => el.textContent = "");
+      function validateForm() {
+        let isValid = true;
+        document
+          .querySelectorAll(".error")
+          .forEach((el) => (el.textContent = ""));
 
-            let name = document.getElementById("name").value;
-            if (name.trim() === "" || name.length < 3) {
-                document.getElementById("nameError").textContent = "Name should be minimum 3 characters";
-                isValid = false;
-            }
-
-            let email = document.getElementById("email").value;
-            let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-            if (!emailPattern.test(email)) {
-                document.getElementById("emailError").textContent = "Enter a valid email";
-                isValid = false;
-            }
-
-            let password = document.getElementById("password").value;
-            let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            if (!passwordPattern.test(password)) {
-                document.getElementById("passwordError").textContent = "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters";
-                isValid = false;
-            }
-
-            let confirmPassword = document.getElementById("confirmPassword").value;
-            if (confirmPassword !== password) {
-                document.getElementById("confirmPasswordError").textContent = "Passwords do not match";
-                isValid = false;
-            }
-
-            return isValid;
+        let name = document.getElementById("name").value;
+        if (name.trim() === "" || name.length < 3) {
+          document.getElementById("nameError").textContent =
+            "Name should be minimum 3 characters";
+          isValid = false;
         }
+
+        let email = document.getElementById("email").value;
+        let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if (!emailPattern.test(email)) {
+          document.getElementById("emailError").textContent =
+            "Enter a valid email";
+          isValid = false;
+        }
+
+        let password = document.getElementById("password").value;
+        let passwordPattern =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordPattern.test(password)) {
+          document.getElementById("passwordError").textContent =
+            "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters";
+          isValid = false;
+        }
+
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        if (confirmPassword !== password) {
+          document.getElementById("confirmPasswordError").textContent =
+            "Passwords do not match";
+          isValid = false;
+        }
+
+        return isValid;
+      }
+
+      document
+        .getElementById("submit")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+
+          if (validateForm()) {
+            alert("Form submitted successfully!");
+          }
+        });
     </script>
-</body>
+  </body>
 </html>
